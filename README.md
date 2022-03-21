@@ -1,6 +1,8 @@
 # MySmartChat
 
 
+Hello world
+
 
 ## Getting started
 
