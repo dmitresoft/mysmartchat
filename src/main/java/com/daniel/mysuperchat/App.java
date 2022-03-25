@@ -7,6 +7,5 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.print("your name: ");
         String name = scanner.nextLine();
-        System.out.println(name);
     }
 }
