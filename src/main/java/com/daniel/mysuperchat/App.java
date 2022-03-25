@@ -3,10 +3,18 @@ package com.daniel.mysuperchat;
 import java.util.Scanner;
 
 public class App {
+
+
+
     public static void main(String[] args){
+        getUserName();
+    }
+
+    private static String getUserName() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("your name: ");
-        String name = scanner.nextLine();
-        System.out.println(name);
+        return scanner.nextLine();
+
     }
+
 }
