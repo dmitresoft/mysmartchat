@@ -9,8 +9,8 @@ public class Message implements Serializable {
     private UUID userId;
     private String userName;
     private String messageText;
+    private Date date;
 
-    Date date = new Date();
 
     public UUID getUserId() {
         return userId;
@@ -36,6 +36,13 @@ public class Message implements Serializable {
         this.messageText = messageText;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getFormattedText(){
         return date.getHours() + ":" + date.getMinutes() + " " + userName + ": " + messageText;

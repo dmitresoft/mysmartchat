@@ -10,6 +10,7 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.UUID;
 
 public class Sender implements Runnable {
@@ -43,6 +44,7 @@ public class Sender implements Runnable {
                 message.setUserId(userId);
                 message.setUserName(userName);
                 message.setMessageText(input);
+                message.setDate(new Date());
 
                 byte[] buffer = SerialUtil.serialize(message);
 
