@@ -7,10 +7,10 @@ public class TextUtil {
 
     @Nonnull
     public static String getUserInput(@Nonnull String prompt) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print(prompt);
-            return scanner.nextLine();
-        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        return scanner.nextLine();
+
     }
 
 }
