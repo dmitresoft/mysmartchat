@@ -37,7 +37,7 @@ public class ReceiverListener implements Runnable {
 
                 Message message = SerialUtil.deserialize(inputPacket.getData());
 
-                if (message.getUserId().equals(userId)) {
+                if (!message.getUserId().equals(userId)) {
                     System.out.println(message.getFormattedText());
                 }
 
