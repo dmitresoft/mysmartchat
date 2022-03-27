@@ -2,22 +2,19 @@ package com.daniel.mysuperchat.net;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.nio.channels.DatagramChannel;
-import java.util.Date;
 
-public class ServerListener implements Runnable {
+public class ReceiverListener implements Runnable {
 
     private final int port;
     private Thread worker;
     private boolean working = true;
 
-    public ServerListener(int port) {
+    public ReceiverListener(int port) {
         this.port = port;
     }
 
     @Override
     public void run() {
-
 
         try {
 
@@ -31,7 +28,7 @@ public class ServerListener implements Runnable {
                 serverSocket.receive(inputPacket);
                 String str = new String(inputPacket.getData(), 0, inputPacket.getLength());
 
-                System.out.println("получили " + str);
+                System.out.println(str);
             }
 
         } catch (Exception e) {
@@ -50,6 +47,7 @@ public class ServerListener implements Runnable {
 
     public void stop() {
         working = false;
+
     }
 
 

@@ -1,16 +1,19 @@
 package com.daniel.mysuperchat;
 
-import com.daniel.mysuperchat.net.ServerListener;
+import com.daniel.mysuperchat.net.ReceiverListener;
+import com.daniel.mysuperchat.net.Sender;
 import com.daniel.mysuperchat.utils.TextUtil;
 
 import javax.annotation.Nonnull;
 
 public class App {
 
-    private static final int PORT = 50011;
+    private static final int PORT = 50001;
 
     private final String userName;
-    private ServerListener serverListener;
+
+    private ReceiverListener serverListener;
+    private Sender sender;
 
     public App(@Nonnull String userName) {
         this.userName = userName;
@@ -22,14 +25,16 @@ public class App {
             @Override
             public void run() {
                 serverListener.stop();
+                sender.stop();
             }
         }));
 
         // start ....
-        this.serverListener = new ServerListener(PORT);
+        this.serverListener = new ReceiverListener(PORT);
         this.serverListener.start();
 
-
+        this.sender = new Sender(PORT, userName);
+        this.sender.start();
 
     }
 
