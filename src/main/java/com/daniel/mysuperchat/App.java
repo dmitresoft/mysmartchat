@@ -42,10 +42,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String userName="";
-        while (userName.replaceAll(" ", "").isEmpty()) {
-            userName = TextUtil.getUserInput("Your Name: ");
-        }
+        String userName = TextUtil.getUserInput("Your Name: ", false);
         App app = new App(userName, UUID.randomUUID());
         app.begin();
     }
