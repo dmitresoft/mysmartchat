@@ -1,5 +1,7 @@
 package com.daniel.mysuperchat.domain;
 
+import com.daniel.mysuperchat.utils.DateUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -45,7 +47,7 @@ public class Message implements Serializable {
     }
 
     public String getFormattedText(){
-        return date.getHours() + ":" + date.getMinutes() + " " + userName + ": " + messageText;
+        return DateUtil.format(date) + " " + userName + ": " + messageText;
     }
 
 
