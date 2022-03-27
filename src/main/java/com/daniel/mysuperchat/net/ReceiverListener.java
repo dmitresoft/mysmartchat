@@ -10,7 +10,10 @@ public class ReceiverListener implements Runnable {
     private boolean working = true;
     private String userName;
 
-    public ReceiverListener(int port, String userName) { this.port = port; this.userName=userName; }
+    public ReceiverListener(int port, String userName) {
+        this.port = port;
+        this.userName = userName;
+    }
 
     @Override
     public void run() {
@@ -26,7 +29,11 @@ public class ReceiverListener implements Runnable {
 
                 serverSocket.receive(inputPacket);
                 String str = new String(inputPacket.getData(), 0, inputPacket.getLength());
-                if (str.substring(0, userName.length()-1) == userName) {;}else{System.out.println(str);}
+
+                if (!str.startsWith(userName)) {
+                    System.out.println(str);
+                }
+
             }
 
         } catch (Exception e) {
