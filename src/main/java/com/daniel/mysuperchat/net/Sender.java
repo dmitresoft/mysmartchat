@@ -39,7 +39,7 @@ public class Sender implements Runnable {
 
             while (working) {
 
-                String input = TextUtil.getUserInput("> ");
+                String input = TextUtil.getUserInput("");
                 Message message = new Message();
                 message.setUserId(userId);
                 message.setUserName(userName);
