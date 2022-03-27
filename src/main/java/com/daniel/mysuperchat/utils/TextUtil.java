@@ -6,23 +6,16 @@ import java.util.Scanner;
 public class TextUtil {
 
     @Nonnull
-    public static String getUserInput(@Nonnull String prompt, boolean allowEmpty) {
-
-        String result = getString(prompt);
-
-        if (allowEmpty) {
-            return result;
-        }
-
+    public static String getNonEmptyUserInput(@Nonnull String prompt) {
+        String result;
         do {
-            result = getString(prompt);
+            result = getUserInput(prompt);
         } while (result.isEmpty());
-        
         return result;
-
     }
 
-    private static String getString(String prompt) {
+    @Nonnull
+    public static String getUserInput(@Nonnull String prompt) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(prompt);
         return scanner.nextLine().trim();
