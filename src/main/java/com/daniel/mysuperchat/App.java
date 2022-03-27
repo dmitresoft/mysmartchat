@@ -30,7 +30,7 @@ public class App {
         }));
 
         // start ....
-        this.serverListener = new ReceiverListener(PORT);
+        this.serverListener = new ReceiverListener(PORT, userName);
         this.serverListener.start();
 
         this.sender = new Sender(PORT, userName);

@@ -28,7 +28,7 @@ public class Sender implements Runnable {
         try {
 
             DatagramSocket clientSocket = new DatagramSocket();
-            SocketAddress address = new InetSocketAddress("0.0.0.0", port);
+            SocketAddress address = new InetSocketAddress("10.10.1.0", port);
 
             while (working) {
 

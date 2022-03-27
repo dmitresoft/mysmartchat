@@ -8,10 +8,9 @@ public class ReceiverListener implements Runnable {
     private final int port;
     private Thread worker;
     private boolean working = true;
+    private String userName;
 
-    public ReceiverListener(int port) {
-        this.port = port;
-    }
+    public ReceiverListener(int port, String userName) { this.port = port; this.userName=userName; }
 
     @Override
     public void run() {
@@ -27,8 +26,7 @@ public class ReceiverListener implements Runnable {
 
                 serverSocket.receive(inputPacket);
                 String str = new String(inputPacket.getData(), 0, inputPacket.getLength());
-
-                System.out.println(str);
+                if (str.substring(0, userName.length()-1) == userName) {;}else{System.out.println(str);}
             }
 
         } catch (Exception e) {
