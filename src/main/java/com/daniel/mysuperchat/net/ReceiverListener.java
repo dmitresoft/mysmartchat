@@ -1,18 +1,24 @@
 package com.daniel.mysuperchat.net;
 
+import com.daniel.mysuperchat.domain.Message;
+import com.daniel.mysuperchat.utils.SerialUtil;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.UUID;
 
 public class ReceiverListener implements Runnable {
 
     private final int port;
+    private final UUID userId;
     private Thread worker;
     private boolean working = true;
     private String userName;
 
-    public ReceiverListener(int port, String userName) {
+    public ReceiverListener(int port, String userName, UUID userId) {
         this.port = port;
         this.userName = userName;
+        this.userId = userId;
     }
 
     @Override
@@ -28,11 +34,13 @@ public class ReceiverListener implements Runnable {
                 DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
 
                 serverSocket.receive(inputPacket);
-                String str = new String(inputPacket.getData(), 0, inputPacket.getLength());
 
-                if (!str.startsWith(userName)) {
-                    System.out.println(str);
+                Message message = SerialUtil.deserialize(inputPacket.getData());
+
+                if (message.getUserId() != userId) {
+                    System.out.println(message.getFormattedText());
                 }
+
 
             }
 

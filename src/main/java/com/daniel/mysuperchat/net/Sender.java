@@ -1,24 +1,30 @@
 package com.daniel.mysuperchat.net;
 
+import com.daniel.mysuperchat.domain.Message;
+import com.daniel.mysuperchat.utils.SerialUtil;
 import com.daniel.mysuperchat.utils.TextUtil;
 
+import java.io.Serial;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 public class Sender implements Runnable {
 
 
     private final int port;
     private final String userName;
+    private final UUID userId;
     private Thread worker;
     private boolean working = true;
 
-    public Sender(int port, String userName) {
+    public Sender(int port, String userName, UUID userId) {
         this.port = port;
         this.userName = userName;
+        this.userId = userId;
     }
 
 
@@ -33,9 +39,14 @@ public class Sender implements Runnable {
             while (working) {
 
                 String input = TextUtil.getUserInput("> ");
-                byte[] sendingDataBuffer = (userName + ": " + input).getBytes(StandardCharsets.UTF_8);
+                Message message = new Message();
+                message.setUserId(userId);
+                message.setUserName(userName);
+                message.setMessageText(input);
 
-                DatagramPacket outputPacket = new DatagramPacket(sendingDataBuffer, sendingDataBuffer.length, address);
+                byte[] buffer = SerialUtil.serialize(message);
+
+                DatagramPacket outputPacket = new DatagramPacket(buffer, buffer.length, address);
                 clientSocket.send(outputPacket);
 
             }
